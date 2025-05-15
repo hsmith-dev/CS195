@@ -77,4 +77,9 @@ int main() {
 	}
 	cout << endl;
 
+	// resizable container - helpful for frequent & efficient insertion/deletion
+	// no random access - must iterate through the list to find an element
+	// higher memory overhead than arrays (pointers for each element)
+	// works well iterators and other STL compatibility
+
 }
