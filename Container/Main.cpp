@@ -55,7 +55,7 @@ int main() {
 	// out of bounds exceptions are given
 
 	// STL list
-	cout << "STL List" << endl;
+	cout << endl << "STL List" << endl;
 	// need to import the STL list library
 
 	// normally std::list but we are using namespace std
@@ -63,6 +63,13 @@ int main() {
 
 	// to iterate through you will use for each loop
 	cout << "Size of list: " << height.size() << endl; // output the size of the list
+
+	height.push_front(2.3f); // add to the front of the list
+	height.push_back(7.8f); // add to the back of the list
+
+	cout << "Size of list after adding: " << height.size() << endl; // output the size of the list
+
+	height.sort(); // sort the list
 
 	cout << "All heights: ";
 	for (float h : height) {
