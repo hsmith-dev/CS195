@@ -3,7 +3,7 @@
 #include "MagicCreature.h"  
 using namespace std;  
 
-void CreateMagicCreature(Database database) {
+void CreateMagicCreature(Database& database) {
 	int choice;
 	cout << "Choose which magic creature to create:\n1 - Dragon\n2 - Phoenix" << endl;
 	cin >> choice;
