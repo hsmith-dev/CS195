@@ -13,7 +13,7 @@ public:
         return 3.14f * m_radius * m_radius;
     }
 
-    void SetRadius(float radius) const { radius = radius; }
+    void SetRadius(float radius) { m_radius = radius; }
     float GetRadius() { return m_radius; }
     string GetType() const override { return "Circle"; }
 
