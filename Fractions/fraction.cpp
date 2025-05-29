@@ -3,29 +3,35 @@
 #include "fraction.h" 
 
 namespace mathlib {  
-	mathlib::Fraction::Fraction(int num, int denum) {  
+	template<typename T>
+	mathlib::Fraction<T>::Fraction(T num, T denum) {  
 		if (denum == 0) {  
 			throw std::invalid_argument("Denominator cannot be zero.");  
 		}  
 
 		numerator = num;  
 		denomerator = denum;
+		simplify();
 	}  
 
 	// Arithmetic operators  
-	Fraction Fraction::operator+(const Fraction& other) const {  
+	template<typename T>
+	Fraction<T> Fraction<T>::operator + (const Fraction<T>& other) const {  
 		return Fraction(numerator * other.denomerator + other.numerator * denomerator, denomerator * other.denomerator);
 	}  
 
-	Fraction Fraction::operator-(const Fraction& other) const {  
+	template<typename T>
+	Fraction<T> Fraction<T>::operator - (const Fraction<T>& other) const {
 		return Fraction(numerator * other.denomerator - other.numerator * denomerator, denomerator * other.denomerator);
 	}  
 
-	Fraction Fraction::operator*(const Fraction& other) const {  
+	template<typename T>
+	Fraction<T> Fraction<T>::operator * (const Fraction<T>& other) const {
 		return Fraction(numerator * other.numerator, denomerator * other.denomerator);
 	}  
 
-	Fraction Fraction::operator/(const Fraction& other) const {  
+	template<typename T>
+	Fraction<T> Fraction<T>::operator / (const Fraction<T>& other) const {
 		if (other.numerator == 0) {  
 			throw std::invalid_argument("Cannot divide by zero.");  
 		}  
@@ -33,37 +39,45 @@ namespace mathlib {
 	}  
 
 	// Comparison operators  
-	bool Fraction::operator==(const Fraction& other) const {  
+	template<typename T>
+	bool Fraction<T>::operator == (const Fraction<T>& other) const {
 		return numerator * other.denomerator == other.numerator * denomerator;
 	}  
 
-	bool Fraction::operator!=(const Fraction& other) const {  
+	template<typename T>
+	bool Fraction<T>::operator != (const Fraction<T>& other) const {
 		return !(*this == other);  
 	}  
 
-	bool Fraction::operator<(const Fraction& other) const {  
+	template<typename T>
+	bool Fraction<T>::operator < (const Fraction<T>& other) const {
 		return numerator * other.denomerator < other.numerator * denomerator;
 	}  
 
-	bool Fraction::operator<=(const Fraction& other) const {  
+	template<typename T>
+	bool Fraction<T>::operator <= (const Fraction<T>& other) const {
 		return *this < other || *this == other;  
 	}  
 
-	bool Fraction::operator>(const Fraction& other) const {  
+	template<typename T>
+	bool Fraction<T>::operator > (const Fraction<T>& other) const {
 		return !(*this <= other);  
 	}  
 
-	bool Fraction::operator>=(const Fraction& other) const {  
+	template<typename T>
+	bool Fraction<T>::operator >= (const Fraction<T>& other) const {
 		return !(*this < other);  
 	}  
 
 	// Stream operators  
-	std::ostream& operator<<(std::ostream& os, Fraction& fract) {  
+	template<typename U>
+	std::ostream& operator << (std::ostream& os, Fraction<U>& fract) {  
 		os << fract.getNumerator() << '/' << fract.getDenominator();  
 		return os;  
 	}  
 
-	std::istream& operator>>(std::istream& is, Fraction& fract) {  
+	template<typename U>
+	std::istream& operator >> (std::istream& is, Fraction<U>& fract) {
 		char seperator;  
 		is >> fract.numerator >> seperator >> fract.denomerator;
 		if (fract.denomerator == 0) {
@@ -73,11 +87,13 @@ namespace mathlib {
 		return is;  
 	}  
 
-	int gcd(int numerator, int denomerator) {
+	template<typename T>
+	T gcd(T numerator, T denomerator) {
 		return (denomerator == 0) ? numerator : gcd(denomerator, numerator % denomerator);
 	}
 
-	void Fraction::simplify() {   
+	template<typename T>
+	void Fraction<T>::simplify() {   
 		int gcd = Fraction::gcd(numerator, denomerator);  
 		numerator /= gcd;
 		denomerator /= gcd;
@@ -87,7 +103,8 @@ namespace mathlib {
 		}  
 	}  
 
-	double Fraction::toDouble() const {
+	template<typename T>
+	double Fraction<T>::toDouble() const {
 		return static_cast<double>(numerator) / denomerator;
 	}
 }

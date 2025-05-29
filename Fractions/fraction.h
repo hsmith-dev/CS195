@@ -1,40 +1,43 @@
 #pragma once
 
 namespace mathlib {
+	template <typename T>
 	class Fraction {
 	private:
-		int numerator;
-		int denomerator;
+		T numerator;
+		T denomerator;
 
 	public:
 		// Constructor
-		mathlib::Fraction(int num, int denum);
+		mathlib::Fraction(T num, T denum);
 
 		// Arthmetic Operators Overloading
-		Fraction operator+(const mathlib::Fraction& other) const;
-		Fraction operator-(const mathlib::Fraction& other) const;
-		Fraction operator*(const mathlib::Fraction& other) const;
-		Fraction operator/(const mathlib::Fraction& other) const;
+		Fraction<T> operator + (const mathlib::Fraction<T>& other) const;
+		Fraction<T> operator - (const mathlib::Fraction<T>& other) const;
+		Fraction<T> operator * (const mathlib::Fraction<T>& other) const;
+		Fraction<T> operator / (const mathlib::Fraction<T>& other) const;
 
 		// Comparison Operators Overloading
-		bool operator==(const mathlib::Fraction& other) const;
-		bool operator!=(const mathlib::Fraction& other) const;
-		bool operator<(const mathlib::Fraction& other) const;
-		bool operator>(const mathlib::Fraction& other) const;
-		bool operator<=(const mathlib::Fraction& other) const;
-		bool operator>=(const mathlib::Fraction& other) const;
+		bool operator == (const mathlib::Fraction<T>& other) const;
+		bool operator != (const mathlib::Fraction<T>& other) const;
+		bool operator < (const mathlib::Fraction<T>& other) const;
+		bool operator > (const mathlib::Fraction<T>& other) const;
+		bool operator <= (const mathlib::Fraction<T>& other) const;
+		bool operator >= (const mathlib::Fraction<T>& other) const;
 
 		// Stream Operators Overloading
-		friend std::ostream& operator<<(std::ostream& os, Fraction& frac);
-		friend std::istream& operator>>(std::istream& is, Fraction& frac);
+		template <typename U>
+		friend std::ostream& operator<<(std::ostream& os, const Fraction<U>& frac);
+		template <typename U>
+		friend std::istream& operator>>(std::istream& is, Fraction<U>& frac);
 
 		// Helper Functions
 		void simplify();
 		double toDouble() const;
-		int gcd(int numerator, int denominator);
+		int gcd(T numerator, T denominator);
 
 		// Get Functions
-		int getNumerator() { return numerator; }
-		int getDenominator() { return denomerator; }
+		T getNumerator() { return numerator; }
+		T getDenominator() { return denomerator; }
 	};
 }
