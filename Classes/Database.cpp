@@ -66,7 +66,6 @@ void Database::DisplayAll() {
 	cout << "All creatures:" << endl;
 	for (MagicCreature* creature : creatures) {
 		creature->Write(cout);
-		return;
 	}
 	cout << "No creatures in the database." << endl;
 }
